@@ -1,0 +1,12 @@
+# Dependencias de Node
+node_modules/
+
+# Archivos de entorno y secretos (¡Crucial para la API Key de Gemini!)
+.env
+
+# Archivos de configuración local de Vercel
+.vercel/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

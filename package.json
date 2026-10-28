@@ -1,0 +1,16 @@
+{
+  "name": "proyecto-integrador-m3",
+  "version": "1.0.0",
+  "description": "SPA de chat con Sheldon Cooper usando Gemini AI y Vercel Serverless Functions",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "vitest",
+    "dev": "vercel dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitest": "^5.0.5"
+  }
+}
