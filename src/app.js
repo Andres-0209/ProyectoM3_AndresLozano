@@ -1,7 +1,5 @@
-// 1. Estado en memoria del chat
-let chatMemory = [
-    { sender: 'character', text: 'Hola. Espero que tus preguntas se encuentren dentro de los parámetros de la lógica y la razón.' }
-];
+// 1. Importamos la lógica del chat (estado en memoria y renderizado) desde su propio módulo
+import { initChatLogic } from './chat.js';
 
 // 2. Definimos el contenido de nuestras vistas
 const routes = {
@@ -10,8 +8,8 @@ const routes = {
             <h2>Bienvenido al mundo de la Fisica Teorica</h2>
             <p>Hola. Asumo que ya están familiarizados con mi intelecto... Soy Sheldon Lee Cooper, físico teórico con un coeficiente intelectual de 187.</p>
             <div class="image-gallery">
-                <img src="img/sheldon1.jpg" alt="Sheldon Cooper analizando">
-                <img src="img/sheldon2.jpg" alt="Sheldon Cooper en su sitio">
+                <img src="/img/sheldon%201.jpeg" alt="Sheldon Cooper analizando">
+                <img src="/img/sheldon%202.jpeg" alt="Sheldon Cooper en su sitio">
             </div>
         </div>
     `,
@@ -42,8 +40,8 @@ const routes = {
 function renderRoute() {
     let path = window.location.pathname;
     
-    // Si la ruta está vacía o es la raíz, la normalizamos a /home
-    if (path === '/' || path === '') {
+    // Si la ruta está vacía, es la raíz o es /index.html (p. ej. Live Server), la normalizamos a /home
+    if (path === '/' || path === '' || path === '/index.html') {
         path = '/home';
     }
 
@@ -75,6 +73,10 @@ function setupRouter() {
 
             if (href && href.startsWith('/')) {
                 e.preventDefault();
+
+                // Evitamos duplicar entradas en el historial si ya estamos en esa ruta
+                if (href === window.location.pathname) return;
+
                 history.pushState({}, '', href);
                 renderRoute();
             }
@@ -86,62 +88,7 @@ function setupRouter() {
     });
 }
 
-// 5. Lógica del Chat conectada al backend y gestión de memoria
-function initChatLogic() {
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    const messagesList = document.getElementById('messagesList');
-
-    function renderMessages() {
-        if (!messagesList) return;
-        messagesList.innerHTML = chatMemory.map(msg => `
-            <div class="message ${msg.sender}">
-                ${msg.text}
-            </div>
-        `).join('');
-        messagesList.scrollTop = messagesList.scrollHeight;
-    }
-
-    // Renderizado inicial al entrar a la vista de chat
-    renderMessages();
-
-    if (chatForm) {
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const userText = chatInput.value.trim();
-            if (!userText) return;
-
-            // 1. Añadir mensaje del usuario a la memoria
-            chatMemory.push({ sender: 'user', text: userText });
-            chatInput.value = '';
-            renderMessages();
-
-            try {
-                // 2. Petición POST a la Serverless Function de la API
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: userText })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    chatMemory.push({ sender: 'character', text: data.reply });
-                } else {
-                    chatMemory.push({ sender: 'character', text: 'Error en el sistema. Mis capacidades lógicas superan esta anomalía temporal.' });
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                chatMemory.push({ sender: 'character', text: 'Falla geológica en la red. No puedo comunicarme con el servidor en este momento.' });
-            }
-
-            renderMessages();
-        });
-    }
-}
-
-// 6. Inicialización al cargar la página
+// 5. Inicialización al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     setupRouter();
     renderRoute();
