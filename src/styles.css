@@ -241,6 +241,30 @@ nav a:focus {
   background-color: #7a00d1;
 }
 
+/* Estado de carga: formulario desactivado mientras Sheldon responde */
+.chat-input-form button:disabled,
+.chat-input-form input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-input-form button:disabled:hover {
+  background-color: var(--color-accent);
+}
+
+/* Indicador "Sheldon está escribiendo..." */
+.message.typing {
+  font-style: italic;
+  color: #6b7280;
+}
+
+/* Mensajes de error (red, servidor o IA) */
+.message.error {
+  border-color: #e5a3a3;
+  background-color: #fdf2f2;
+  color: #8a1c1c;
+}
+
 /* ==========================================
    5. FOOTER
    ========================================== */

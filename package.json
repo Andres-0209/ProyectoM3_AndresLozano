@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "vitest",
-    "dev": "vercel dev"
+    "start": "vercel dev"
   },
   "keywords": [],
   "author": "",

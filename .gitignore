@@ -10,3 +10,7 @@ node_modules/
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Variables de entorno descargadas con "vercel env pull"
+.env*.local
+.vercel
