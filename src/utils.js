@@ -6,6 +6,9 @@ export const MAX_MESSAGE_LENGTH = 500;
 // Número máximo de mensajes del historial que se envían al servidor (coincide con el límite del servidor)
 export const MAX_HISTORY_MESSAGES = 20;
 
+// Longitud máxima de cada respuesta de Sheldon dentro del historial (coincide con el límite del servidor)
+export const MAX_MODEL_HISTORY_LENGTH = 2000;
+
 // Elimina espacios al inicio y al final, y reduce los espacios internos repetidos a uno solo
 export function normalizeText(text) {
     if (typeof text !== 'string') return '';
@@ -27,6 +30,7 @@ export function createMessage(sender, text, isError = false) {
 // Convierte la memoria del chat al historial que espera el servidor: [{ role: 'user' | 'model', text }]
 // - Excluye los mensajes de error y los mensajes del usuario que no obtuvieron respuesta (failed),
 //   para que los turnos usuario/personaje sigan alternándose.
+// - Recorta las respuestas largas del personaje a MAX_MODEL_HISTORY_LENGTH para que el servidor no las rechace.
 // - Conserva solo los últimos MAX_HISTORY_MESSAGES.
 // - Elimina los mensajes iniciales del personaje para que el historial empiece por el usuario.
 export function toApiHistory(chatMemory) {
@@ -34,7 +38,9 @@ export function toApiHistory(chatMemory) {
 
     const history = chatMemory
         .filter((msg) => !msg.isError && !msg.failed && typeof msg.text === 'string' && msg.text.length > 0)
-        .map((msg) => ({ role: msg.sender === 'user' ? 'user' : 'model', text: msg.text }))
+        .map((msg) => (msg.sender === 'user'
+            ? { role: 'user', text: msg.text }
+            : { role: 'model', text: msg.text.slice(0, MAX_MODEL_HISTORY_LENGTH) }))
         .slice(-MAX_HISTORY_MESSAGES);
 
     const firstUserIndex = history.findIndex((msg) => msg.role === 'user');

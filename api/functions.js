@@ -2,12 +2,14 @@
 // La API Key solo existe aquí, en el servidor, leída desde las variables de entorno.
 
 // Modelo de Gemini (se puede cambiar con la variable de entorno GEMINI_MODEL)
-const DEFAULT_MODEL = 'gemini-3.1-flash-lite';
+const DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 // Límites para evitar consumo innecesario de la API
 export const MAX_MESSAGES = 20;
 export const MAX_TEXT_LENGTH = 500;
+// Las respuestas de Sheldon (rol "model") pueden ser más largas que lo que escribe el usuario
+export const MAX_MODEL_TEXT_LENGTH = 2000;
 const REQUEST_TIMEOUT = 15000;
 
 // 1. System Prompt: personalidad, tono, restricciones y formato de las respuestas
@@ -46,8 +48,11 @@ export function validateMessages(messages) {
         if (typeof msg.text !== 'string' || msg.text.trim().length === 0) {
             return 'Los mensajes no pueden estar vacíos.';
         }
-        if (msg.text.length > MAX_TEXT_LENGTH) {
+        if (msg.role === 'user' && msg.text.length > MAX_TEXT_LENGTH) {
             return `Cada mensaje puede tener como máximo ${MAX_TEXT_LENGTH} caracteres.`;
+        }
+        if (msg.role === 'model' && msg.text.length > MAX_MODEL_TEXT_LENGTH) {
+            return `Las respuestas del historial pueden tener como máximo ${MAX_MODEL_TEXT_LENGTH} caracteres.`;
         }
     }
 

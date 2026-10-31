@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
     MAX_MESSAGE_LENGTH,
     MAX_HISTORY_MESSAGES,
+    MAX_MODEL_HISTORY_LENGTH,
     normalizeText,
     isValidMessage,
     createMessage,
@@ -89,6 +90,20 @@ describe('toApiHistory', () => {
         expect(history.length).toBeLessThanOrEqual(MAX_HISTORY_MESSAGES);
         expect(history[0].role).toBe('user');
         expect(history.at(-1).text).toBe('Mensaje 29');
+    });
+
+    it('recorta las respuestas largas del personaje y no recorta los mensajes del usuario', () => {
+        const longReply = 'a'.repeat(MAX_MODEL_HISTORY_LENGTH + 300);
+        const memory = [
+            createMessage('user', 'Explícame la teoría de cuerdas'),
+            createMessage('character', longReply),
+            createMessage('user', '¿Por qué?')
+        ];
+        const history = toApiHistory(memory);
+
+        expect(history[1].text.length).toBe(MAX_MODEL_HISTORY_LENGTH);
+        expect(history[0].text).toBe('Explícame la teoría de cuerdas');
+        expect(history[2].text).toBe('¿Por qué?');
     });
 
     it('devuelve un array vacío si la entrada no es válida', () => {
