@@ -4,7 +4,7 @@
   "description": "SPA de chat con Sheldon Cooper usando Gemini AI y Vercel Serverless Functions",
   "main": "src/app.js",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "start": "vercel dev"
   },
   "keywords": [],
