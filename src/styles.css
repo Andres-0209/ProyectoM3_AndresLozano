@@ -1,5 +1,5 @@
 /* ==========================================
-   1. RESET MODAL Y VARIABLES GLOBALES
+  1. RESET Y VARIABLES GLOBALES (PALETA QUANTUM UNIVERSE)
    ========================================== */
 *,
 *::before,
@@ -8,17 +8,35 @@
 }
 
 :root {
-  --color-dark: #27005D;       
-  --color-accent: #9400FF;     
-  --color-light-blue: #AED2FF; 
-  --color-bg-light: #E4F1FF;   
-  
-  --bg-color: var(--color-bg-light);
-  --text-color: #2b2b2b;
-  --user-msg-bg: var(--color-light-blue);
-  --character-msg-bg: #ffffff;
-  --border-color: #c4d7ed;
-  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* Paleta Quantum Universe */
+  --cosmic-black: #090D1C;
+  --space-blue: #171D35;
+  --nebula-purple: #30205B;
+  --neon-cyan: #00E5FF;
+  --electric-violet: #A855F7;
+  --quantum-pink: #FF43C6;
+  --plasma-green: #A3FF70;
+  --starlight: #EAF0FF;
+  --nebula-gray: #64748B;
+
+  /* Usos semánticos (60 % fondos, 25 % morados/azules, 10 % neón, 5 % detalles) */
+  --bg-color: var(--cosmic-black);
+  --surface: rgba(23, 29, 53, 0.82);
+  --surface-strong: var(--space-blue);
+  --border-color: rgba(100, 116, 139, 0.35);
+  --border-glow: rgba(0, 229, 255, 0.35);
+  --text-color: var(--starlight);
+  --text-muted: rgba(234, 240, 255, 0.72);
+  --accent: var(--neon-cyan);
+  --accent-2: var(--electric-violet);
+  --user-msg-bg: linear-gradient(135deg, var(--nebula-purple), #4B2A8C);
+  --character-msg-bg: rgba(9, 13, 28, 0.85);
+  --glow-cyan: 0 0 12px rgba(0, 229, 255, 0.45);
+  --glow-violet: 0 0 14px rgba(168, 85, 247, 0.45);
+
+  --font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --radius: 0.875rem;
 }
 
 html {
@@ -30,17 +48,24 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-family);
-  background-color: var(--bg-color);
   color: var(--text-color);
+  background-color: var(--bg-color);
+  /* Fondo espacial: nebulosas suaves con degradados (solo CSS) */
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(48, 32, 91, 0.55), transparent 55%),
+    radial-gradient(ellipse at 85% 30%, rgba(0, 229, 255, 0.08), transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12), transparent 60%);
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
 }
 
-body, button, input, textarea, select {
+/* Los controles heredan la tipografía. "body" no se incluye: anularía su font-family y volvería a la fuente serif por defecto */
+button, input, textarea, select {
   font: inherit;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, figure, blockquote {
   margin: 0;
 }
 
@@ -60,20 +85,35 @@ button, input {
   margin: 0;
   padding: 0;
   background: none;
+  color: inherit;
 }
 
 button {
   cursor: pointer;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* ==========================================
-   2. HEADER Y NAVEGACIÓN COMPACTA
+   2. HEADER Y NAVEGACIÓN
    ========================================== */
 header {
-  background-color: var(--color-dark);
-  color: #ffffff;
-  padding: 0.8rem 1.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(9, 13, 28, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 0 1px 18px rgba(0, 229, 255, 0.12);
+  padding: 0.75rem 1rem;
 }
 
 .nav-container {
@@ -83,33 +123,75 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-header h1 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--starlight);
+  text-shadow: var(--glow-cyan);
+}
+
+/* Pequeño átomo como marca de la app */
+.brand-mark {
+  position: relative;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: var(--glow-cyan);
+  flex-shrink: 0;
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--electric-violet);
+  box-shadow: var(--glow-violet);
 }
 
 nav ul {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.35rem;
 }
 
 nav a {
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--text-muted);
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 nav a:hover,
-nav a:focus {
-  background-color: rgba(148, 0, 255, 0.35);
-  color: var(--color-light-blue);
+nav a:focus-visible {
+  color: var(--starlight);
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Enlace de la vista actual (aria-current lo asigna app.js) */
+nav a[aria-current="page"] {
+  color: var(--cosmic-black);
+  background-color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
 }
 
 /* ==========================================
@@ -118,38 +200,43 @@ nav a:focus {
 #app {
   flex: 1;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 .view-container {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 10px;
+  background-color: var(--surface);
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--radius);
   border: 1px solid var(--border-color);
-  box-shadow: 0 4px 12px rgba(39, 0, 93, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(234, 240, 255, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   animation: fadeIn 0.3s ease-in-out;
 }
 
 .view-container h2 {
-  color: var(--color-dark);
-  font-size: 1.5rem;
+  font-family: var(--font-display);
+  color: var(--starlight);
+  font-size: 1.4rem;
   font-weight: 700;
-  border-bottom: 2px solid var(--color-bg-light);
-  padding-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .view-container p {
-  line-height: 1.6;
-  color: #4a5568;
+  line-height: 1.7;
+  color: var(--text-muted);
   font-size: 1rem;
+}
+
+.view-container strong {
+  color: var(--neon-cyan);
 }
 
 @keyframes fadeIn {
@@ -158,17 +245,225 @@ nav a:focus {
 }
 
 /* ==========================================
-   4. INTERFAZ DE CHAT COMPACTA
+   4. HOME: HERO, PRESENTACIÓN Y GALERÍA
+   ========================================== */
+.home-view {
+  gap: 2rem;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0, 229, 255, 0.1), transparent 60%),
+    linear-gradient(160deg, rgba(48, 32, 91, 0.6), rgba(9, 13, 28, 0.6));
+  border: 1px solid var(--border-glow);
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+}
+
+.view-container .hero-title {
+  font-size: 2rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-bottom: 0;
+  border-bottom: 0;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--electric-violet), var(--quantum-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.view-container .hero-slogan {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--starlight);
+}
+
+/* Átomo decorativo (elemento visual de física, solo CSS) */
+.atom {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  flex-shrink: 0;
+}
+
+.atom-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--electric-violet);
+  box-shadow: var(--glow-violet), 0 0 24px rgba(255, 67, 198, 0.5);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.atom-orbit {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(0, 229, 255, 0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+  animation: orbit 6s linear infinite;
+}
+
+.atom-orbit:nth-child(2) { --tilt: 0deg; }
+.atom-orbit:nth-child(3) { --tilt: 60deg; animation-duration: 7.5s; }
+.atom-orbit:nth-child(4) { --tilt: 120deg; animation-duration: 9s; }
+
+/* Electrón que recorre cada órbita */
+.atom-orbit::before {
+  content: "";
+  position: absolute;
+  top: -0.3rem;
+  left: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: var(--plasma-green);
+  box-shadow: 0 0 10px var(--plasma-green);
+}
+
+@keyframes orbit {
+  from { transform: rotate(var(--tilt)) scaleY(0.38) rotate(0deg); }
+  to { transform: rotate(var(--tilt)) scaleY(0.38) rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.25); }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--starlight);
+  margin-bottom: 1rem;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.5rem;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--electric-violet));
+}
+
+.intro-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-card {
+  flex: 1;
+  padding: 1.1rem 1.15rem;
+  border-radius: var(--radius);
+  background-color: rgba(9, 13, 28, 0.6);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.info-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+}
+
+.info-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--neon-cyan);
+  letter-spacing: 0.04em;
+}
+
+.view-container .info-card p {
+  font-size: 0.95rem;
+}
+
+.bazinga-quote {
+  margin-top: 1rem;
+  padding: 1rem 1.15rem;
+  border-left: 4px solid var(--quantum-pink);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background-color: rgba(255, 67, 198, 0.08);
+}
+
+.view-container .bazinga-quote p {
+  color: var(--starlight);
+  font-style: italic;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.image-gallery figure {
+  flex: 1 1 14rem;
+  max-width: 22rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--surface-strong);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.image-gallery figure:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-violet), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.image-gallery img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.image-gallery figcaption {
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================
+   5. INTERFAZ DE CHAT
    ========================================== */
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 65vh;
-  background-color: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  min-height: 22rem;
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(39, 0, 93, 0.05);
+  background-color: rgba(9, 13, 28, 0.75);
+  box-shadow: inset 0 0 40px rgba(48, 32, 91, 0.45), var(--glow-cyan);
 }
 
 .messages-list {
@@ -177,134 +472,202 @@ nav a:focus {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  background-color: #fafbfc;
+  gap: 0.85rem;
+  /* Detalle científico discreto: cuadrícula tenue de fondo */
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 2rem 2rem;
 }
 
 .message {
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  max-width: 80%;
+  padding: 0.8rem 1.05rem;
+  border-radius: 1rem;
+  max-width: 85%;
   word-break: break-word;
-  line-height: 1.4;
+  line-height: 1.5;
   font-size: 0.95rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .message.user {
   align-self: flex-end;
-  background-color: var(--user-msg-bg);
-  color: #1a2b3c;
-  border-bottom-right-radius: 2px;
+  background: var(--user-msg-bg);
+  color: var(--starlight);
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  border-bottom-right-radius: 0.25rem;
 }
 
 .message.character {
   align-self: flex-start;
   background-color: var(--character-msg-bg);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-  border-bottom-left-radius: 2px;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-left: 3px solid var(--neon-cyan);
+  color: var(--starlight);
+  border-bottom-left-radius: 0.25rem;
 }
 
 .chat-input-form {
   display: flex;
-  padding: 0.75rem;
-  background-color: #ffffff;
-  border-top: 1px solid var(--border-color);
   gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgba(23, 29, 53, 0.95);
+  border-top: 1px solid var(--border-glow);
 }
 
 .chat-input-form input {
   flex: 1;
   min-width: 0;
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 999px;
   font-size: 0.95rem;
-  background-color: var(--color-bg-light);
+  background-color: rgba(9, 13, 28, 0.9);
+  color: var(--starlight);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-input-form input::placeholder {
+  color: rgba(234, 240, 255, 0.5);
 }
 
 .chat-input-form input:focus {
-  border-color: var(--color-accent);
-  background-color: #ffffff;
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
 }
 
 .chat-input-form button {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--cosmic-black);
+  background: linear-gradient(135deg, var(--neon-cyan), var(--electric-violet));
+  box-shadow: var(--glow-cyan);
+  transition: box-shadow 0.2s ease, transform 0.15s ease, filter 0.2s ease;
 }
 
 .chat-input-form button:hover {
-  background-color: #7a00d1;
+  box-shadow: var(--glow-cyan), var(--glow-violet);
+  filter: brightness(1.1);
+}
+
+.chat-input-form button:active {
+  transform: scale(0.97);
 }
 
 /* Estado de carga: formulario desactivado mientras Sheldon responde */
 .chat-input-form button:disabled,
 .chat-input-form input:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
 .chat-input-form button:disabled:hover {
-  background-color: var(--color-accent);
+  box-shadow: var(--glow-cyan);
+  filter: none;
 }
 
 /* Indicador "Sheldon está escribiendo..." */
 .message.typing {
   font-style: italic;
-  color: #6b7280;
+  color: var(--neon-cyan);
+  animation: typingPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes typingPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
 /* Mensajes de error (red, servidor o IA) */
 .message.error {
-  border-color: #e5a3a3;
-  background-color: #fdf2f2;
-  color: #8a1c1c;
+  border-color: rgba(255, 67, 198, 0.7);
+  border-left-color: var(--quantum-pink);
+  background-color: rgba(255, 67, 198, 0.12);
+  color: #FFD6F1;
 }
 
 /* ==========================================
-   5. FOOTER
+   6. FOOTER
    ========================================== */
 footer {
-  background-color: var(--color-dark);
-  color: var(--color-light-blue);
-  text-align: center;
-  padding: 0.8rem;
-  font-size: 0.85rem;
   margin-top: auto;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background-color: rgba(9, 13, 28, 0.9);
+  border-top: 1px solid var(--border-glow);
+  box-shadow: 0 -1px 18px rgba(0, 229, 255, 0.08);
+}
+
+.footer-brand {
+  margin-bottom: 0.25rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
 }
 
 /* ==========================================
-   6. MEDIA QUERIES (RESPONSIVO)
+   7. MEDIA QUERIES (MOBILE-FIRST)
    ========================================== */
 @media (min-width: 768px) {
+  header {
+    padding: 0.85rem 1.5rem;
+  }
+
+  .brand {
+    font-size: 1.25rem;
+  }
+
   #app {
     padding: 2.5rem 2rem;
   }
+
+  .view-container {
+    padding: 2rem;
+  }
+
+  .view-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: 2.5rem;
+  }
+
+  .view-container .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .atom {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .intro-grid {
+    flex-direction: row;
+  }
+
+  .message {
+    max-width: 75%;
+  }
 }
 
-/* ==========================================
-   7. GALERÍA DE IMÁGENES RESPONSIVA
-   ========================================== */
-.image-gallery {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.image-gallery img {
-  flex: 1;
-  min-width: 140px;
-  max-width: 280px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 8px rgba(39, 0, 93, 0.08);
+/* Accesibilidad: sin animaciones para quien lo prefiera */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
