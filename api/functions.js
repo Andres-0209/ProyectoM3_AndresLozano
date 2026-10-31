@@ -2,7 +2,7 @@
 // La API Key solo existe aquí, en el servidor, leída desde las variables de entorno.
 
 // Modelo de Gemini (se puede cambiar con la variable de entorno GEMINI_MODEL)
-const DEFAULT_MODEL = 'gemini-3.8-flash';
+const DEFAULT_MODEL = 'gemini-3.1-flash-lite';
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 // Límites para evitar consumo innecesario de la API
