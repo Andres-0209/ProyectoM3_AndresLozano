@@ -1,5 +1,5 @@
 /* ==========================================
-  1. RESET Y VARIABLES GLOBALES (PALETA QUANTUM UNIVERSE)
+   1. RESET Y VARIABLES GLOBALES (PALETA QUANTUM UNIVERSE)
    ========================================== */
 *,
 *::before,
@@ -18,25 +18,85 @@
   --plasma-green: #A3FF70;
   --starlight: #EAF0FF;
   --nebula-gray: #64748B;
+  /* Azul eléctrico: color de Leonard indicado en el plan */
+  --electric-blue: #4D7CFF;
 
-  /* Usos semánticos (60 % fondos, 25 % morados/azules, 10 % neón, 5 % detalles) */
-  --bg-color: var(--cosmic-black);
-  --surface: rgba(23, 29, 53, 0.82);
-  --surface-strong: var(--space-blue);
-  --border-color: rgba(100, 116, 139, 0.35);
-  --border-glow: rgba(0, 229, 255, 0.35);
-  --text-color: var(--starlight);
-  --text-muted: rgba(234, 240, 255, 0.72);
-  --accent: var(--neon-cyan);
-  --accent-2: var(--electric-violet);
-  --user-msg-bg: linear-gradient(135deg, var(--nebula-purple), #4B2A8C);
-  --character-msg-bg: rgba(9, 13, 28, 0.85);
-  --glow-cyan: 0 0 12px rgba(0, 229, 255, 0.45);
-  --glow-violet: 0 0 14px rgba(168, 85, 247, 0.45);
+  /* Color de personaje por defecto (Sheldon); las clases .chat-amy, .card-leonard, etc. lo sustituyen */
+  --char-color: var(--neon-cyan);
+  --char-color-2: #00B8D4;
 
   --font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
   --radius: 0.875rem;
+}
+
+/* Tema oscuro (por defecto) */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-color: var(--cosmic-black);
+  --bg-glow-1: rgba(48, 32, 91, 0.55);
+  --bg-glow-2: rgba(0, 229, 255, 0.08);
+  --bg-glow-3: rgba(168, 85, 247, 0.12);
+  --surface: rgba(23, 29, 53, 0.82);
+  --surface-strong: var(--space-blue);
+  --surface-soft: rgba(9, 13, 28, 0.6);
+  --surface-input: rgba(9, 13, 28, 0.9);
+  --surface-bar: rgba(9, 13, 28, 0.85);
+  --border-color: rgba(100, 116, 139, 0.35);
+  --border-glow: rgba(0, 229, 255, 0.35);
+  --text-color: var(--starlight);
+  --text-muted: rgba(234, 240, 255, 0.72);
+  --text-placeholder: rgba(234, 240, 255, 0.5);
+  --accent: var(--neon-cyan);
+  --accent-text: var(--neon-cyan);
+  --on-accent: var(--cosmic-black);
+  --hero-bg: linear-gradient(160deg, rgba(48, 32, 91, 0.6), rgba(9, 13, 28, 0.6));
+  --grid-line: rgba(0, 229, 255, 0.04);
+  --chat-bg: rgba(9, 13, 28, 0.75);
+  --chat-inner-shadow: inset 0 0 40px rgba(48, 32, 91, 0.45);
+  --user-msg-bg: linear-gradient(135deg, var(--nebula-purple), #4B2A8C);
+  --user-msg-text: var(--starlight);
+  --character-msg-bg: rgba(9, 13, 28, 0.85);
+  --error-bg: rgba(255, 67, 198, 0.12);
+  --error-text: #FFD6F1;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --glow-cyan: 0 0 12px rgba(0, 229, 255, 0.45);
+  --glow-violet: 0 0 14px rgba(168, 85, 247, 0.45);
+}
+
+/* Tema claro: mismos componentes, colores redefinidos con variables */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-color: #EAF0FF;
+  --bg-glow-1: rgba(168, 85, 247, 0.18);
+  --bg-glow-2: rgba(0, 229, 255, 0.18);
+  --bg-glow-3: rgba(255, 67, 198, 0.1);
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: #FFFFFF;
+  --surface-soft: rgba(234, 240, 255, 0.8);
+  --surface-input: #FFFFFF;
+  --surface-bar: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(100, 116, 139, 0.3);
+  --border-glow: rgba(48, 32, 91, 0.25);
+  --text-color: var(--space-blue);
+  --text-muted: #3D4566;
+  --text-placeholder: var(--nebula-gray);
+  --accent: #00A3BF;
+  --accent-text: #00728A;
+  --on-accent: #FFFFFF;
+  --hero-bg: linear-gradient(160deg, rgba(168, 85, 247, 0.15), rgba(0, 229, 255, 0.12));
+  --grid-line: rgba(48, 32, 91, 0.06);
+  --chat-bg: rgba(255, 255, 255, 0.85);
+  --chat-inner-shadow: inset 0 0 30px rgba(168, 85, 247, 0.08);
+  --user-msg-bg: linear-gradient(135deg, #6D3FD1, var(--electric-violet));
+  --user-msg-text: #FFFFFF;
+  --character-msg-bg: #FFFFFF;
+  --error-bg: #FFE4F5;
+  --error-text: #8A1468;
+  --shadow: 0 10px 28px rgba(23, 29, 53, 0.12);
+  --glow-cyan: 0 0 10px rgba(0, 163, 191, 0.25);
+  --glow-violet: 0 0 12px rgba(168, 85, 247, 0.25);
 }
 
 html {
@@ -52,12 +112,13 @@ body {
   background-color: var(--bg-color);
   /* Fondo espacial: nebulosas suaves con degradados (solo CSS) */
   background-image:
-    radial-gradient(ellipse at 15% 10%, rgba(48, 32, 91, 0.55), transparent 55%),
-    radial-gradient(ellipse at 85% 30%, rgba(0, 229, 255, 0.08), transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12), transparent 60%);
+    radial-gradient(ellipse at 15% 10%, var(--bg-glow-1), transparent 55%),
+    radial-gradient(ellipse at 85% 30%, var(--bg-glow-2), transparent 50%),
+    radial-gradient(ellipse at 50% 100%, var(--bg-glow-3), transparent 60%);
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Los controles heredan la tipografía. "body" no se incluye: anularía su font-family y volvería a la fuente serif por defecto */
@@ -103,13 +164,13 @@ img {
 }
 
 /* ==========================================
-   2. HEADER Y NAVEGACIÓN
+   2. HEADER, NAVEGACIÓN Y SELECTOR DE TEMA
    ========================================== */
 header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: rgba(9, 13, 28, 0.85);
+  background-color: var(--surface-bar);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-glow);
   box-shadow: 0 1px 18px rgba(0, 229, 255, 0.12);
@@ -117,7 +178,7 @@ header {
 }
 
 .nav-container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -135,7 +196,7 @@ header {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--starlight);
+  color: var(--text-color);
   text-shadow: var(--glow-cyan);
 }
 
@@ -144,7 +205,7 @@ header {
   position: relative;
   width: 1.4rem;
   height: 1.4rem;
-  border: 2px solid var(--neon-cyan);
+  border: 2px solid var(--accent);
   border-radius: 50%;
   box-shadow: var(--glow-cyan);
   flex-shrink: 0;
@@ -162,13 +223,19 @@ header {
   box-shadow: var(--glow-violet);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 nav ul {
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-nav a {
+header nav a {
   display: inline-block;
   padding: 0.45rem 0.85rem;
   border: 1px solid transparent;
@@ -179,19 +246,50 @@ nav a {
   transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-nav a:hover,
-nav a:focus-visible {
-  color: var(--starlight);
+header nav a:hover,
+header nav a:focus-visible {
+  color: var(--text-color);
   border-color: var(--border-glow);
   box-shadow: var(--glow-cyan);
 }
 
 /* Enlace de la vista actual (aria-current lo asigna app.js) */
-nav a[aria-current="page"] {
-  color: var(--cosmic-black);
-  background-color: var(--neon-cyan);
-  border-color: var(--neon-cyan);
+header nav a[aria-current="page"] {
+  color: var(--on-accent);
+  background-color: var(--accent);
+  border-color: var(--accent);
   box-shadow: var(--glow-cyan);
+}
+
+/* Botón de tema: muestra el sol en modo oscuro y la luna en modo claro */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-glow);
+  color: var(--accent-text);
+  background-color: var(--surface-soft);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  box-shadow: var(--glow-cyan);
+  transform: rotate(15deg);
+}
+
+.icon-moon {
+  display: none;
+}
+
+[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .icon-moon {
+  display: block;
 }
 
 /* ==========================================
@@ -200,7 +298,7 @@ nav a[aria-current="page"] {
 #app {
   flex: 1;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 1.5rem 1rem;
   display: flex;
@@ -212,7 +310,7 @@ nav a[aria-current="page"] {
   padding: 1.5rem 1.25rem;
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(234, 240, 255, 0.04);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -221,7 +319,7 @@ nav a[aria-current="page"] {
 
 .view-container h2 {
   font-family: var(--font-display);
-  color: var(--starlight);
+  color: var(--text-color);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -236,7 +334,7 @@ nav a[aria-current="page"] {
 }
 
 .view-container strong {
-  color: var(--neon-cyan);
+  color: var(--accent-text);
 }
 
 @keyframes fadeIn {
@@ -245,7 +343,7 @@ nav a[aria-current="page"] {
 }
 
 /* ==========================================
-   4. HOME: HERO, PRESENTACIÓN Y GALERÍA
+   4. HOME: HERO Y TARJETAS DE PERSONAJES
    ========================================== */
 .home-view {
   gap: 2rem;
@@ -261,7 +359,7 @@ nav a[aria-current="page"] {
   border-radius: var(--radius);
   background:
     radial-gradient(circle at 50% 40%, rgba(0, 229, 255, 0.1), transparent 60%),
-    linear-gradient(160deg, rgba(48, 32, 91, 0.6), rgba(9, 13, 28, 0.6));
+    var(--hero-bg);
   border: 1px solid var(--border-glow);
 }
 
@@ -270,7 +368,7 @@ nav a[aria-current="page"] {
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--neon-cyan);
+  color: var(--accent-text);
 }
 
 .view-container .hero-title {
@@ -280,18 +378,17 @@ nav a[aria-current="page"] {
   letter-spacing: 0.06em;
   padding-bottom: 0;
   border-bottom: 0;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--electric-violet), var(--quantum-pink));
+  background: linear-gradient(90deg, var(--accent), var(--electric-violet), var(--quantum-pink));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: none;
 }
 
 .view-container .hero-slogan {
   margin-top: 0.5rem;
   font-size: 1.05rem;
   font-style: italic;
-  color: var(--starlight);
+  color: var(--text-color);
 }
 
 /* Átomo decorativo (elemento visual de física, solo CSS) */
@@ -318,9 +415,9 @@ nav a[aria-current="page"] {
 .atom-orbit {
   position: absolute;
   inset: 0;
-  border: 2px solid rgba(0, 229, 255, 0.7);
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+  opacity: 0.75;
   animation: orbit 6s linear infinite;
 }
 
@@ -355,8 +452,11 @@ nav a[aria-current="page"] {
 .section-title {
   font-family: var(--font-display);
   font-size: 1.2rem;
-  color: var(--starlight);
-  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin-bottom: 1.25rem;
+  text-align: center;
 }
 
 .section-title::after {
@@ -364,106 +464,232 @@ nav a[aria-current="page"] {
   display: block;
   width: 3rem;
   height: 3px;
-  margin-top: 0.5rem;
+  margin: 0.5rem auto 0;
   border-radius: 3px;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--electric-violet));
+  background: linear-gradient(90deg, var(--accent), var(--electric-violet));
 }
 
-.intro-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+/* Color distintivo de cada personaje */
+.card-sheldon, .switch-sheldon, .chat-sheldon, .typing-sheldon { --char-color: var(--neon-cyan); --char-color-2: #00B8D4; }
+.card-amy, .switch-amy, .chat-amy, .typing-amy { --char-color: var(--quantum-pink); --char-color-2: var(--electric-violet); }
+.card-leonard, .switch-leonard, .chat-leonard, .typing-leonard { --char-color: var(--electric-blue); --char-color-2: #2F5BFF; }
 
-.info-card {
-  flex: 1;
-  padding: 1.1rem 1.15rem;
-  border-radius: var(--radius);
-  background-color: rgba(9, 13, 28, 0.6);
-  border: 1px solid var(--border-color);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.info-card:hover {
-  border-color: var(--border-glow);
-  box-shadow: var(--glow-cyan);
-  transform: translateY(-2px);
-}
-
-.info-card h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  color: var(--neon-cyan);
-  letter-spacing: 0.04em;
-}
-
-.view-container .info-card p {
-  font-size: 0.95rem;
-}
-
-.bazinga-quote {
-  margin-top: 1rem;
-  padding: 1rem 1.15rem;
-  border-left: 4px solid var(--quantum-pink);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  background-color: rgba(255, 67, 198, 0.08);
-}
-
-.view-container .bazinga-quote p {
-  color: var(--starlight);
-  font-style: italic;
-}
-
-.image-gallery {
+/* Rejilla Mobile-First: 1 columna en móvil, 2 en tablet y 3 en escritorio */
+.character-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
+  gap: 1.25rem;
 }
 
-.image-gallery figure {
-  flex: 1 1 14rem;
+.character-card {
+  position: relative;
+  flex: 1 1 100%;
   max-width: 22rem;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius);
   overflow: hidden;
   background-color: var(--surface-strong);
-  border: 1px solid var(--border-glow);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.image-gallery figure:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--glow-violet), 0 8px 24px rgba(0, 0, 0, 0.4);
+/* Iluminación al pasar el cursor o al seleccionar con el teclado */
+.character-card:hover,
+.character-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--char-color);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--char-color) 55%, transparent), var(--shadow);
 }
 
-.image-gallery img {
+.card-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.card-image img {
   width: 100%;
-  height: 15rem;
+  height: 100%;
   object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
 }
 
-.image-gallery figcaption {
-  padding: 0.6rem 0.9rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-color);
+.character-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* Línea luminosa con el color del personaje bajo la imagen */
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--char-color), var(--char-color-2));
+  box-shadow: 0 0 12px var(--char-color);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem 1.25rem;
+  flex: 1;
+}
+
+.card-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--text-color);
+}
+
+.view-container .card-role {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--char-color);
+}
+
+[data-theme="light"] .view-container .card-role {
+  color: color-mix(in srgb, var(--char-color) 65%, #000);
+}
+
+/* En móvil (sin cursor) la descripción siempre está visible */
+.view-container .card-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+/* margin-top: auto alinea los botones al final de cada tarjeta */
+.card-button {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--cosmic-black);
+  background: linear-gradient(135deg, var(--char-color), var(--char-color-2));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--char-color) 45%, transparent);
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.card-leonard .card-button,
+.card-amy .card-button {
+  color: #FFFFFF;
+}
+
+.card-button:hover {
+  filter: brightness(1.12);
+}
+
+.card-button:active {
+  transform: scale(0.97);
+}
+
+/* En dispositivos con cursor, la descripción aparece al pasar el cursor o al enfocar la tarjeta */
+@media (hover: hover) and (pointer: fine) {
+  .view-container .card-description {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .character-card:hover .card-description,
+  .character-card:focus-within .card-description {
+    max-height: 6rem;
+    opacity: 1;
+  }
 }
 
 /* ==========================================
    5. INTERFAZ DE CHAT
    ========================================== */
+.chat-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.chat-character {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chat-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--accent);
+  box-shadow: var(--glow-cyan);
+}
+
+.view-container .chat-character-name {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.view-container .chat-character-role {
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+/* Selector de personaje dentro del chat */
+.character-switcher {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border-color);
+}
+
+.switch-option {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.switch-option:hover {
+  color: var(--text-color);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--char-color) 45%, transparent);
+}
+
+.switch-option[aria-current="true"] {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--char-color), var(--char-color-2));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--char-color) 50%, transparent);
+}
+
+.switch-sheldon[aria-current="true"] {
+  color: var(--cosmic-black);
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 65vh;
   min-height: 22rem;
-  border: 1px solid var(--border-glow);
+  border: 1px solid color-mix(in srgb, var(--char-color) 45%, transparent);
   border-radius: var(--radius);
   overflow: hidden;
-  background-color: rgba(9, 13, 28, 0.75);
-  box-shadow: inset 0 0 40px rgba(48, 32, 91, 0.45), var(--glow-cyan);
+  background-color: var(--chat-bg);
+  box-shadow: var(--chat-inner-shadow), 0 0 12px color-mix(in srgb, var(--char-color) 35%, transparent);
 }
 
 .messages-list {
@@ -475,8 +701,8 @@ nav a[aria-current="page"] {
   gap: 0.85rem;
   /* Detalle científico discreto: cuadrícula tenue de fondo */
   background-image:
-    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 2rem 2rem;
 }
 
@@ -487,23 +713,24 @@ nav a[aria-current="page"] {
   word-break: break-word;
   line-height: 1.5;
   font-size: 0.95rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .message.user {
   align-self: flex-end;
   background: var(--user-msg-bg);
-  color: var(--starlight);
+  color: var(--user-msg-text);
   border: 1px solid rgba(168, 85, 247, 0.55);
   border-bottom-right-radius: 0.25rem;
 }
 
+/* Las burbujas del personaje usan su color distintivo */
 .message.character {
   align-self: flex-start;
   background-color: var(--character-msg-bg);
-  border: 1px solid rgba(0, 229, 255, 0.4);
-  border-left: 3px solid var(--neon-cyan);
-  color: var(--starlight);
+  border: 1px solid color-mix(in srgb, var(--char-color) 40%, transparent);
+  border-left: 3px solid var(--char-color);
+  color: var(--text-color);
   border-bottom-left-radius: 0.25rem;
 }
 
@@ -511,7 +738,7 @@ nav a[aria-current="page"] {
   display: flex;
   gap: 0.5rem;
   padding: 0.75rem;
-  background-color: rgba(23, 29, 53, 0.95);
+  background-color: var(--surface-bar);
   border-top: 1px solid var(--border-glow);
 }
 
@@ -522,19 +749,19 @@ nav a[aria-current="page"] {
   border: 1px solid var(--border-color);
   border-radius: 999px;
   font-size: 0.95rem;
-  background-color: rgba(9, 13, 28, 0.9);
-  color: var(--starlight);
+  background-color: var(--surface-input);
+  color: var(--text-color);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .chat-input-form input::placeholder {
-  color: rgba(234, 240, 255, 0.5);
+  color: var(--text-placeholder);
 }
 
 .chat-input-form input:focus {
   outline: none;
-  border-color: var(--neon-cyan);
-  box-shadow: var(--glow-cyan);
+  border-color: var(--char-color);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--char-color) 45%, transparent);
 }
 
 .chat-input-form button {
@@ -557,7 +784,7 @@ nav a[aria-current="page"] {
   transform: scale(0.97);
 }
 
-/* Estado de carga: formulario desactivado mientras Sheldon responde */
+/* Estado de carga: formulario desactivado mientras el personaje responde */
 .chat-input-form button:disabled,
 .chat-input-form input:disabled {
   opacity: 0.55;
@@ -569,28 +796,166 @@ nav a[aria-current="page"] {
   filter: none;
 }
 
-/* Indicador "Sheldon está escribiendo..." */
-.message.typing {
-  font-style: italic;
-  color: var(--neon-cyan);
-  animation: typingPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes typingPulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
-}
-
 /* Mensajes de error (red, servidor o IA) */
 .message.error {
   border-color: rgba(255, 67, 198, 0.7);
   border-left-color: var(--quantum-pink);
-  background-color: rgba(255, 67, 198, 0.12);
-  color: #FFD6F1;
+  background-color: var(--error-bg);
+  color: var(--error-text);
 }
 
 /* ==========================================
-   6. FOOTER
+   6. INDICADORES DE ESCRITURA PERSONALIZADOS
+   ========================================== */
+.message.typing {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.typing-icon {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+}
+
+.typing-icon span {
+  position: absolute;
+}
+
+/* Sheldon — Quantum Atom: electrones orbitando un núcleo con pulso luminoso */
+.typing-sheldon .typing-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--char-color);
+  box-shadow: 0 0 10px var(--char-color);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.typing-sheldon .typing-icon span {
+  inset: 0;
+  border: 1.5px solid color-mix(in srgb, var(--char-color) 70%, transparent);
+  border-radius: 50%;
+  animation: orbit 1.6s linear infinite;
+}
+
+.typing-sheldon .typing-icon span:nth-child(1) { --tilt: 0deg; }
+.typing-sheldon .typing-icon span:nth-child(2) { --tilt: 60deg; animation-duration: 2s; }
+.typing-sheldon .typing-icon span:nth-child(3) { --tilt: 120deg; animation-duration: 2.4s; }
+
+.typing-sheldon .typing-icon span::before {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  left: 50%;
+  width: 0.35rem;
+  height: 0.35rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: var(--char-color);
+  box-shadow: 0 0 6px var(--char-color);
+}
+
+/* Amy — Neural Connection: tres neuronas que se transmiten un impulso luminoso */
+.typing-amy .typing-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  right: 0.2rem;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, var(--char-color-2), var(--char-color));
+  opacity: 0.5;
+}
+
+.typing-amy .typing-icon span {
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: -0.275rem;
+  border-radius: 50%;
+  background-color: var(--char-color-2);
+  animation: neuronFire 1.2s ease-in-out infinite;
+}
+
+.typing-amy .typing-icon span:nth-child(1) { left: 0; }
+.typing-amy .typing-icon span:nth-child(2) { left: calc(50% - 0.275rem); animation-delay: 0.2s; }
+.typing-amy .typing-icon span:nth-child(3) { right: 0; animation-delay: 0.4s; }
+
+@keyframes neuronFire {
+  0%, 100% { background-color: var(--char-color-2); box-shadow: none; transform: scale(1); }
+  40% { background-color: var(--char-color); box-shadow: 0 0 10px var(--char-color); transform: scale(1.35); }
+}
+
+/* Leonard — Laser Experiment: un haz láser que viaja y genera un destello en el objetivo */
+.typing-leonard .typing-icon span:nth-child(1) {
+  top: 50%;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: -0.2rem;
+  border-radius: 50%;
+  background-color: var(--char-color);
+  box-shadow: 0 0 6px var(--char-color);
+}
+
+.typing-leonard .typing-icon span:nth-child(2) {
+  top: 50%;
+  left: 0.2rem;
+  height: 2px;
+  margin-top: -1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--char-color-2), var(--char-color));
+  box-shadow: 0 0 8px var(--char-color);
+  animation: laserBeam 1.4s ease-in infinite;
+}
+
+.typing-leonard .typing-icon span:nth-child(3) {
+  top: 50%;
+  right: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-top: -0.3rem;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px var(--char-color), 0 0 18px var(--char-color);
+  opacity: 0;
+  animation: laserFlash 1.4s ease-out infinite;
+}
+
+@keyframes laserBeam {
+  0% { width: 0; opacity: 1; }
+  60% { width: calc(100% - 0.5rem); opacity: 1; }
+  100% { width: calc(100% - 0.5rem); opacity: 0; }
+}
+
+@keyframes laserFlash {
+  0%, 55% { opacity: 0; transform: scale(0.4); }
+  65% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+.typing-label {
+  animation: typingPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes typingPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ==========================================
+   7. FOOTER
    ========================================== */
 footer {
   margin-top: auto;
@@ -598,7 +963,7 @@ footer {
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-muted);
-  background-color: rgba(9, 13, 28, 0.9);
+  background-color: var(--surface-bar);
   border-top: 1px solid var(--border-glow);
   box-shadow: 0 -1px 18px rgba(0, 229, 255, 0.08);
 }
@@ -609,13 +974,20 @@ footer {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--neon-cyan);
+  color: var(--accent-text);
   text-shadow: var(--glow-cyan);
 }
 
 /* ==========================================
-   7. MEDIA QUERIES (MOBILE-FIRST)
+   8. MEDIA QUERIES (MOBILE-FIRST)
    ========================================== */
+/* Tablet: 2 columnas de tarjetas */
+@media (min-width: 640px) {
+  .character-card {
+    flex: 1 1 calc(50% - 0.625rem);
+  }
+}
+
 @media (min-width: 768px) {
   header {
     padding: 0.85rem 1.5rem;
@@ -653,12 +1025,15 @@ footer {
     height: 10rem;
   }
 
-  .intro-grid {
-    flex-direction: row;
-  }
-
   .message {
     max-width: 75%;
+  }
+}
+
+/* Escritorio: 3 columnas de tarjetas */
+@media (min-width: 960px) {
+  .character-card {
+    flex: 1 1 calc(33.333% - 0.84rem);
   }
 }
 

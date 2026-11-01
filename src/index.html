@@ -1,12 +1,21 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The Big Bang Universe: conversa con Sheldon Cooper. Donde la ciencia se encuentra con la conversación." />
+    <meta name="description" content="The Big Bang Universe: conversa con Sheldon, Amy y Leonard. Donde la ciencia se encuentra con la conversación." />
     <meta name="theme-color" content="#090D1C" />
+    <script>
+      // Aplica el tema guardado (o el del sistema) antes de pintar la página, para evitar un parpadeo de colores
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem('tbbu-theme'); } catch (e) {}
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = (saved === 'light' || saved === 'dark') ? saved : (prefersLight ? 'light' : 'dark');
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
-    <title>The Big Bang Universe | Chat con Sheldon Cooper</title>
+    <title>The Big Bang Universe | Chat con Sheldon, Amy y Leonard</title>
   </head>
   <body>
     <header>
@@ -15,13 +24,26 @@
           <span class="brand-mark" aria-hidden="true"></span>
           The Big Bang Universe
         </h1>
-        <nav aria-label="Navegación principal">
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/chat">Chat</a></li>
-            <li><a href="/about">Acerca de</a></li>
-          </ul>
-        </nav>
+        <div class="header-actions">
+          <nav aria-label="Navegación principal">
+            <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/chat">Chat</a></li>
+              <li><a href="/about">Acerca de</a></li>
+            </ul>
+          </nav>
+          <button type="button" id="themeToggle" class="theme-toggle" aria-label="Activar modo claro" title="Activar modo claro">
+            <!-- Sol: visible en modo oscuro (cambia a claro) -->
+            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2" />
+              <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <!-- Luna: visible en modo claro (cambia a oscuro) -->
+            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
     <main id="app">
@@ -41,63 +63,42 @@
           </div>
         </section>
 
-        <section class="intro" aria-labelledby="intro-title">
-          <h3 id="intro-title" class="section-title">Bienvenido al mundo de la Física Teórica</h3>
-          <div class="intro-grid">
-            <article class="info-card">
-              <h4>Quién soy</h4>
-              <p>
-                Hola. Asumo que ya están familiarizados con mi intelecto, pero por si
-                acaso, permítanme presentarme: soy Sheldon Lee Cooper, físico teórico.
-                Poseo un doctorado, un máster, un coeficiente intelectual de 187 —el
-                cual, por razones obvias, no requiere validación por parte de ustedes—
-                y una capacidad superior para comprender las leyes fundamentales del
-                universo que escapa a la comprensión del ciudadano promedio.
-              </p>
+        <section class="characters" aria-labelledby="characters-title">
+          <h3 id="characters-title" class="section-title">Elige a tu científico</h3>
+          <div class="character-grid">
+            <article class="character-card card-sheldon">
+              <div class="card-image">
+                <img src="/img/personajes/sheldon.jpg" alt="Sheldon Cooper con su camiseta de Flash" loading="lazy" />
+              </div>
+              <div class="card-body">
+                <h4 class="card-name">Sheldon Cooper</h4>
+                <p class="card-role">Físico teórico</p>
+                <p class="card-description">Brillante, extremadamente lógico y amante de las reglas.</p>
+                <a href="/chat?personaje=sheldon" class="card-button" data-link>Chatear con Sheldon</a>
+              </div>
             </article>
-            <article class="info-card">
-              <h4>Mi día a día</h4>
-              <p>
-                Trabajo en el departamento de física teórica del Caltech, donde paso
-                mis días resolviendo problemas complejos de la física, como la teoría
-                de cuerdas, y lidiando pacientemente con las limitaciones cognitivas
-                de mis colegas. Entre mis aficiones se encuentran los cómics, la
-                ciencia ficción, los trenes, las banderas del mundo y mantener un
-                estricto orden cronológico y higiénico en mi apartamento, el cual
-                comparto bajo los términos rigurosamente redactados de mi Acuerdo de
-                Compañero de Piso.
-              </p>
+            <article class="character-card card-amy">
+              <div class="card-image">
+                <img src="/img/personajes/amy.jpg" alt="Amy Farrah Fowler sonriendo" loading="lazy" />
+              </div>
+              <div class="card-body">
+                <h4 class="card-name">Amy Farrah Fowler</h4>
+                <p class="card-role">Neurobióloga</p>
+                <p class="card-description">Inteligente, analítica y apasionada por la ciencia.</p>
+                <a href="/chat?personaje=amy" class="card-button" data-link>Chatear con Amy</a>
+              </div>
             </article>
-            <article class="info-card">
-              <h4>Normas de convivencia</h4>
-              <p>
-                Si en algún momento deciden interactuar conmigo, les sugiero que
-                eviten los chistes de doble sentido, no toquen mi sitio en el sofá y,
-                sobre todo, recuerden que si creen que han tenido una idea
-                brillante... geológicamente hablando, es muy probable que yo ya la
-                haya descartado hace años.
-              </p>
+            <article class="character-card card-leonard">
+              <div class="card-image">
+                <img src="/img/personajes/leonard.jpg" alt="Leonard Hofstadter con gafas" loading="lazy" />
+              </div>
+              <div class="card-body">
+                <h4 class="card-name">Leonard Hofstadter</h4>
+                <p class="card-role">Físico experimental</p>
+                <p class="card-description">Inteligente, curioso y orientado a la experimentación.</p>
+                <a href="/chat?personaje=leonard" class="card-button" data-link>Chatear con Leonard</a>
+              </div>
             </article>
-          </div>
-          <blockquote class="bazinga-quote">
-            <p>
-              Ah, y por si acaso... ¡Bazinga! (Era una broma, mi intelecto no tolera
-              las mentiras, pero a veces el humor humano requiere ciertas
-              concesiones ilógicas).
-            </p>
-          </blockquote>
-        </section>
-
-        <section class="gallery-section" aria-label="Galería de Sheldon Cooper">
-          <div class="image-gallery">
-            <figure>
-              <img src="/img/sheldon%201.jpeg" alt="Sheldon Cooper analizando" />
-              <figcaption>Analizando una teoría</figcaption>
-            </figure>
-            <figure>
-              <img src="/img/sheldon%202.jpeg" alt="Sheldon Cooper en su sitio" />
-              <figcaption>En su sitio del sofá</figcaption>
-            </figure>
           </div>
         </section>
       </div>

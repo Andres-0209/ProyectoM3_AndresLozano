@@ -55,3 +55,19 @@ export function getErrorMessageForStatus(status) {
     if (status >= 500) return 'Error en el sistema. Mis capacidades lógicas superan esta anomalía temporal.';
     return 'Ocurrió un error inesperado. Inténtalo de nuevo.';
 }
+
+// Lee el personaje del parámetro "personaje" de la URL (p. ej. "?personaje=amy").
+// Devuelve null si no viene o si no está entre los identificadores válidos.
+export function getCharacterFromSearch(search, validIds) {
+    if (typeof search !== 'string' || !Array.isArray(validIds)) return null;
+    const value = new URLSearchParams(search).get('personaje');
+    if (!value) return null;
+    const id = value.trim().toLowerCase();
+    return validIds.includes(id) ? id : null;
+}
+
+// Decide el tema inicial: la preferencia guardada manda; si no hay, se usa la del sistema operativo
+export function resolveTheme(savedTheme, prefersLight) {
+    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+    return prefersLight ? 'light' : 'dark';
+}

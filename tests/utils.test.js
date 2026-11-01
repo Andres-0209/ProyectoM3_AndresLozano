@@ -7,8 +7,11 @@ import {
     isValidMessage,
     createMessage,
     toApiHistory,
-    getErrorMessageForStatus
+    getErrorMessageForStatus,
+    getCharacterFromSearch,
+    resolveTheme
 }  from '../src/utils.js';
+import { CHARACTERS, CHARACTER_ORDER } from '../src/characters.js';
 describe('normalizeText', () => {
     it('elimina espacios al inicio y al final y reduce los espacios internos repetidos', () => {
         expect(normalizeText('   Hola    Sheldon \n ')).toBe('Hola Sheldon');
@@ -130,5 +133,41 @@ describe('getErrorMessageForStatus', () => {
 
     it('devuelve un mensaje genérico para códigos no contemplados', () => {
         expect(getErrorMessageForStatus(418)).toMatch(/error inesperado/);
+    });
+});
+describe('getCharacterFromSearch', () => {
+    it('devuelve el personaje indicado en la URL', () => {
+        expect(getCharacterFromSearch('?personaje=amy', CHARACTER_ORDER)).toBe('amy');
+        expect(getCharacterFromSearch('?personaje=Leonard', CHARACTER_ORDER)).toBe('leonard');
+    });
+
+    it('devuelve null si no hay personaje o si no es válido', () => {
+        expect(getCharacterFromSearch('', CHARACTER_ORDER)).toBeNull();
+        expect(getCharacterFromSearch('?personaje=penny', CHARACTER_ORDER)).toBeNull();
+        expect(getCharacterFromSearch('?otro=amy', CHARACTER_ORDER)).toBeNull();
+        expect(getCharacterFromSearch(undefined, CHARACTER_ORDER)).toBeNull();
+    });
+});
+
+describe('resolveTheme', () => {
+    it('respeta la preferencia guardada', () => {
+        expect(resolveTheme('light', false)).toBe('light');
+        expect(resolveTheme('dark', true)).toBe('dark');
+    });
+
+    it('usa la preferencia del sistema si no hay nada guardado o el valor no es válido', () => {
+        expect(resolveTheme(null, true)).toBe('light');
+        expect(resolveTheme(null, false)).toBe('dark');
+        expect(resolveTheme('azul', true)).toBe('light');
+    });
+});
+
+describe('datos de los personajes', () => {
+    it('cada personaje tiene todos los datos que necesita la interfaz', () => {
+        const fields = ['id', 'name', 'shortName', 'role', 'description', 'image', 'imageAlt', 'greeting', 'typingLabel', 'placeholder'];
+        CHARACTER_ORDER.forEach((id) => {
+            expect(CHARACTERS[id].id).toBe(id);
+            fields.forEach((field) => expect(CHARACTERS[id][field]).toBeTruthy());
+        });
     });
 });
